@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang='en' ng-app='myApp' class='no-js'>
+
+<head>
+
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='description' content=''>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <title>My AngularJS/Flask App</title>
+
+    <!-- Bootstrap v4 CSS-->
+    <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css'>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jointjs/2.1.0/joint.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+
+    <!-- Custom CSS-->
+    <link rel='stylesheet' href='app.css'>
+    <link rel="stylesheet" type="text/css" href="components/ExternalPackage/bootstrap-select.css" />
+
+</head>
+
+<body ng-hide="indexBody">
+
+    <div id="mainMenu">
+        <ul>
+            <li>
+                <div ng-hide="userName" style="font-size: 18px;" ng-bind="nameOfTheUser">userName</div>
+            </li>
+            <li>
+                <a href='#Login' ng-hide="login">Login</a>
+            </li>
+            <li>
+                <a href='#Logout' ng-hide="logout">logout</a>
+            </li>
+            <li>
+                <a href='#Register' ng-hide="register">Register</a>
+            </li>
+            <li>
+                <a href='#Dashboard' ng-hide="dashboard">Dashborad</a>
+            </li>
+            <li>
+                <a href='#AdminPage' ng-hide="adminPage" style="background-color: rgb(158, 163, 173);">Admin Page</a>
+            </li>
+            <li>
+                <div ng-hide="projectName" style="font-size: 20px;"  ng-bind="ProjectName">project name</div>
+            </li>
+            <li>
+                <a href='#UMLEditor' ng-hide="umlEditor" style="background-color: rgb(158, 163, 173);">UML Editor</a>
+            </li>
+            <li>
+                <a href='#SQLEditor' ng-hide="sqlEditor" style="background-color: rgb(158, 163, 173);">SQL Editor</a>
+            </li>
+            <li>
+                <a href='#NFRTable' ng-hide="nfrTable" style="background-color: rgb(158, 163, 173);">NFR Editor</a>
+            </li>
+            <li>
+                <a href='#MatrixWeight' ng-hide="matrixWeight" style="background-color: rgb(158, 163, 173);">Matrix
+                    Weight</a>
+            </li>
+            <li>
+                <a href='#About' ng-hide="about">About</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class='container'>
+
+        <!-- Angular Router Output-->
+        <div ng-view></div>
+
+
+
+    </div>
+    <!-- Bootstrap Required Javascript Files-->
+    <script src='bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js'
+        integrity='sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4'
+        crossorigin='anonymous'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/2.1.0/joint.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="components/ExternalPackage/textarea-helper.js"></script>
+    <script src="components/ExternalPackage/jquery-ui-1.9.2/jquery-1.8.3.js"></script>
+    <script src="components/ExternalPackage/bootstrap-select.js"></script>
+    <script src="components/ExternalPackage/bootstrap.js"></script>
+    <script src="components/ExternalPackage/jquery-ui-1.9.2/ui/jquery-ui.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+
+    <!-- AngularJS Require Javascript Files-->
+    <script src='bower_components/angular/angular.js'></script>
+    <script src='bower_components/angular-route/angular-route.js'></script>
+
+    <!-- App Javascript Files-->
+    <script src='app.js'></script>
+    <script type='text/javascript' src='components/UMLEditor/UMLEditor.js'></script>
+    <script type='text/javascript' src='components/SQLEditor/SQLEditor.js'></script>
+    <script type='text/javascript' src='components/NFRTable/NFRTable.js'></script>
+    <script type='text/javascript' src='components/MatrixWeight/MatrixWeight.js'></script>
+    <script type='text/javascript' src='components/Register/Register.js'></script>
+    <script type='text/javascript' src='components/Login/Login.js'></script>
+    <script type='text/javascript' src='components/Dashboard/Dashboard.js'></script>
+    <script type='text/javascript' src='components/ForgotPassword/ForgotPassword.js'></script>
+    <script type='text/javascript' src='components/About/About.js'></script>
+    <script type='text/javascript' src='components/Logout/Logout.js'></script>
+    <script type='text/javascript' src='components/AdminPage/AdminPage.js'></script>
+
+
+
+    <script type='text/javascript' src='controller.js'></script>
+
+
+    <script>
+
+
+    </script>
+
+</body>
+
+
+
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <link rel="stylesheet" href="components/style/MatrixWeight.css">
+    <link rel="stylesheet" type="text/css" href="components/style/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="components/style/fontAwesome.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel='stylesheet' href='app.css'>
+    <br>
+
+
+    <h1 class="hedaers">Matrix Weight</h1>
+    <P class="paragrapgs"> choose youre matrixs Weights:</P>
+
+    <table class="blueTable">
+        <thead>
+            <tr>
+                <th style="width: 15%;">Component</th>
+                <th>Value</th>
+                <th><button ng-click="UpdateTheJSON()" class="myButton" id="saveButton">Save</button></th>
+            </tr>
+        </thead>
+        <tr>
+            <th style="width: 15%;">UML Graph</th>
+            <th><input type="range" ng-model="component.uml" min=0 max=100 step=1 to-number />{{component.uml}}%</th>
+            <th><button class="myButton" ng-click="sendRequestUML()">Show Matrix</button></th>
+        </tr>
+        <tr>
+            <th style="width: 15%;">SQL Queies</th>
+            <th><input type="range" ng-model="component.sql" min=0 max=100 step=1 to-number />{{component.sql}}%</th>
+            <th><button class="myButton" ng-click="sendRequestSQL()">Show Matrix</button></th>
+        </tr>
+        <tr>
+            <th style="width: 15%;">NFR</th>
+            <th><input type="range" ng-model="component.nfr" min=0 max=100 step=1 to-number />{{component.nfr}}%</th>
+            <th><button class="myButton" ng-click="sendRequestNFR()">Show Matrix</button></th>
+        </tr>
+        <tr>
+            <th style="width: 15%;">Final Matrix</th>
+            <th>Components values must be equal to 100%</th>
+            <th><button class="myButton" ng-click="sendRequestAlgorithmInput()">Show Matrix</button></th>
+        </tr>
+        <tr>
+            <th style="width: 15%;">Project result </th>
+            <th><button class="myButton" ng-click="sendRequestClusters()">Show Clusters</button></th>
+            <th><button class="myButton" ng-click="sendRequestReslut()">Show Result</button></th>
+        </tr>
+    </table>
+
+
+    <div ng-repeat="cluster in resultArray">
+        <br>
+        <br>
+        <table class="blueTable">
+            <tr>
+                <td>Clusert {{cluster.clusterName}}</td>
+                <td ng-repeat="(name,value) in nfrDefalutValue">{{name}}</td>
+                <td>Distance</td>
+            </tr>
+            <tr ng-repeat="db in cluster.clusterInfo">
+                <td>{{db.dbName}}</td>
+                <td ng-repeat="(key,value) in db.nfrValues">{{value}}</th>
+                <th>{{db.result}}</th>
+            </tr>
+        </table>
+    </div>
+
+
+
+    <div id="showMatrix" class="w3-modal">
+        <div class="modal-content-matrix" id="umlMatricContainer">
+            <header class="modal-header-matrix">
+                <span ng-click="closeMatrixWindowModal()" class="close-edit">&times;</span>
+                <h4 class="creation" style="text-align: center;" ng-bind="matrixName">Weighted Matrix</h4>
+            </header>
+            <div id="showMatrixTable">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- show cluster modal-->
+    <!-- Modal -->
+    <div class="modal fade" id="showCluster" role="dialog">
+        <!-- <div class="modal-dialog"> -->
+            <!-- Modal content-->
+            <div class="modal-content-culsters">
+                <div class="modal-header">
+                    <h4 class="modal-title">Project Clusters</h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-model="clusterMessage">
+                        {{clusterMessage}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+                    </div>
+                </div>
+            </div>
+        <!-- </div> -->
+    </div>
+
+
+</body>
+
+</html>

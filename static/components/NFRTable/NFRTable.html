@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <link rel='stylesheet' href='app.css'>
+  <link rel="stylesheet" href="components/style/NFRTableStyle.css">
+  <link rel="stylesheet" type="text/css" href="components/style/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="components/style/fontAwesome.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <br>
+  <h1 class="hedaers">NFR Editor Page</h1>
+  <P class="paragrapgs"> choose youre NFR Values:</P>
+
+  <div class="container">
+    <table class="nfrtable">
+      <thead>
+        <tr>
+          <td>Default Value</td>
+          <td ng-repeat="(key,value) in nfrDefalutValue"><input type="text" ng-model="value.value" style="width: 100%" /></td>
+        </tr>
+        <tr>
+          <th>Class</th>
+          <th ng-repeat="(key,value) in nfrDefalutValue">{{key}}</th>
+        </tr>
+      </thead>
+      <tr ng-repeat="class in classList">
+        <td>{{class.name}}</td>
+        <td class="cell-breakWord" ng-repeat="(key,value) in nfrDefalutValue">  
+          <select ng-model="NFREditorList[class.name][key]" ng-if="value.type=='Select Box'" ng-options="item for (item, itemy) in value.legend"  ng-change="save(NFREditorList[class.name][key],class.name,key)"></select>
+          <div ng-if="value.type=='Range'">
+          <input type="range" ng-init="0" ng-model="NFREditorList[class.name][key]" ng-change="save(NFREditorList[class.name][key],class.name,key)" min="{{value.min}}" max="{{value.max}}" step="{{value.step}}"> {{NFREditorList[class.name][key]}}</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <button ng-click="sendRequest()" class="button" id="showMatrixButton">Show Matrix</button>
+  <button ng-click="UpdateTheJSON()" class="button">Save</button>
+
+  <div id="showMatrix" class="w3-modal">
+    <div class="modal-content-matrix" id="umlMatricContainer">
+      <header class="modal-header-matrix">
+        <span ng-click="closeMatrixWindowModal()" class="close-edit">&times;</span>
+        <h4 class="creation" style="text-align: center;">UML Matrix</h4>
+      </header>
+      <div id="showMatrixTable">
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

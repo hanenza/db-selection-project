@@ -1,0 +1,16 @@
+{
+  "name": "flask-angular",
+  "private": true,
+  "version": "0.0.1",
+  "description": "A skeleton for an AngularJS/Flask App",
+  "repository": "https://github.com/michael-farwell/flask-angular.git",
+  "license": "MIT",
+  "devDependencies": {
+    "bower": "^1.7.7"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "update-deps": "npm update",
+    "postupdate-deps": "bower update"
+  }
+}

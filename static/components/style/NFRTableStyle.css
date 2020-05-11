@@ -1,0 +1,229 @@
+body {
+  background: #F5F7F9;
+  /* background: linear-gradient(to right, #F0F2F0, #D9F7FF); */
+
+}
+.hedaers {
+font-family: 'Allerta Stencil';
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;
+font-size: 18px;
+
+}
+.paragrapgs{
+font-family: "Courier New";
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;
+font-size: 12px;
+}
+#myholder {
+  position: relative;
+  border: 1px solid gray;
+  display: inline-block;
+  background: transparent;
+  overflow: hidden;
+}
+#myholder svg {
+  background: transparent;
+}
+#myholder svg .link {
+  z-index: 2;
+}
+.cell-breakWord {
+  word-wrap: break-word;
+  max-width: 1px;
+}
+.rectangle {
+  height: 33px;
+  width: 130px;
+  background-color: orange;
+  color:black;
+  text-align: center;
+  margin-left: 1052px;;
+  display:inline-block;
+  font-weight: bold;
+}
+
+.method {
+  font-size:10px;
+  text-align: left;
+  padding-left:10px ;
+}
+
+
+
+.one {
+display:inline;
+}
+
+.two {
+display:inline;
+padding-left: 50px;
+}
+
+#btn{
+background-color: #4CAF50;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+cursor: pointer;
+width: 100%;
+  
+}
+
+.editInput{
+  size:2px;
+}
+
+.inputClass{
+  width:120px;
+  height:2px ;
+  display:block;
+}
+
+
+
+/* table.nfrtable {
+  font-family:  sans-serif;
+  border-collapse: collapse;
+  position: absolute;
+  background-color :rgb(73, 144, 172);
+  left: 22%;
+  width: 60%;
+  height:5%;
+  text-align:center;
+  border: 4px double black;
+}
+
+table.nfrtable td, th {
+  border: 4px double black;
+  text-align: left;
+  padding: 8px;
+  text-align: center;
+  background-color: #dddddd;
+  font-size: 12px;
+}
+
+  table.blueTable thead {
+    background: #4C9CA4;
+    background: -moz-linear-gradient(top, #79b5bb 0%, #5ea6ad 66%, #4C9CA4 100%);
+    background: -webkit-linear-gradient(top, #79b5bb 0%, #5ea6ad 66%, #4C9CA4 100%);
+    background: linear-gradient(to bottom, #79b5bb 0%, #5ea6ad 66%, #4C9CA4 100%);
+    border-bottom: 2px solid #444444;
+  } */
+  table.nfrtable {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    border: 1px solid #1C6EA4;
+    background-color: #EEEEEE;
+    width: 70%;
+    text-align: center;
+    border-collapse: collapse;
+    left : 15%;
+    position: relative;
+    table-layout: auto;
+  }
+  table.nfrtable td, table.nfrtable th {
+    border: 1px solid #AAAAAA;
+    padding: 3px 7px;
+
+  }
+  table.nfrtable tbody td {
+    font-size: 15px;
+  }
+  table.nfrtable tr:nth-child(even) {
+    background: #56959b;
+  }
+  table.nfrtable thead {
+    background: #4C9CA4;
+    background: -moz-linear-gradient(top, #5d8e92 0%, #468288 66%, rgb(60, 152, 160) 100%);
+    background: -webkit-linear-gradient(top, #69a9af 0%, #508a8f 66%, rgb(48, 116, 122) 100%);
+    background: linear-gradient(to bottom, #65a3a8 0%, #478e94 66%, rgb(67, 157, 165) 100%);
+    border-bottom: 2px solid #444444;
+    
+  }
+  table.nfrtable thead th {
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    border-left: 0px solid #D0E4F5;
+  }
+  table.nfrtable thead th:first-child {
+    border-left: none;
+  }
+  
+.container {
+  justify-content: center;
+  text-align: center;
+}
+#showMatrixButton{
+  position: relative;
+  left: -50%;
+  bottom: 25%;
+
+}
+.button {
+	box-shadow: 0px 10px 14px -7px #276873;
+	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+	background-color:#599bb3;
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:8px 25px;
+	text-decoration:none;
+  text-shadow:0px 1px 0px #3d768a;
+
+}
+.button:hover {
+	background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+	background-color:#408c99;
+}
+.button:active {
+	position:relative;
+	top:1px;
+}
+
+/* .slider {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background: #599bb3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8%;
+  height: 5%;
+  border-radius: 50%;
+  background: rgb(95, 96, 97);
+  cursor: pointer;
+  position: relative;
+}
+
+.slider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background:  rgb(123, 133, 139);
+  cursor: pointer;
+}  */

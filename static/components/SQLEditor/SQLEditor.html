@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <!-- external package to aouto complete text for textAreaSql -->
+  <link rel="stylesheet" href="components/ExternalPackage/jquery-ui-1.9.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="components/style/SQLEditorStyle.css">
+  <link rel="stylesheet" type="text/css" href="components/style/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="components/style/fontAwesome.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel='stylesheet' href='app.css'>
+
+  <div class="container">
+    <h1 class="hedaers">SQL Editor Page</h1>
+    <P class="paragrapgs"> write youre own quieries:</P>
+    <div class="container">
+      <!-- this is the text area input , the input is always in small letter (auto complete issue) -->
+      <textarea id="SQLTextAreaId" ng-model="SQLTextArea" cols="80" rows="10" ng-keyup="saveQuery()"></textarea>
+      <br />
+      <br />
+    </div>
+    <button ng-click="sendRequest()" class="button" id="showMatrixButton">Show Matrix</button>
+    <button ng-click="UpdateTheJSON()" class="button" id="saveButton">Save</button>
+
+    <div id="editor">
+
+      <!-- this table is for insreting query detalis ,name , type ,join class, frequency -->
+      <div id="detalisTablediv">
+        <table class="detalisTable">
+          <tr>
+            <td>Query Name</td>
+            <td>Query Type</td>
+            <td>Select Classes</td>
+            <td>Your Classes</td>
+            <td>Query Frequency</td>
+          </tr>
+          <tr>
+            <td style="min-width: 150px;max-width: 150px;"><input class="insideTable" ng-model="queryName" disabled>
+            </td>
+            <td>
+              <select ng-model="queryType" ng-options="x for x in queryTypeList" class="form-control" input
+                data-width="100%" style="min-width: 150px;max-width: 150px;" id="selectQueryType"></select>
+            </td>
+            <td style="min-width:150px;max-width: 150px;"><select id="joinClasses1" data-width="100%" multiple></select>
+            </td>
+            <td style="min-width: 150px;max-width: 150px;"><select id="joinClasses2" data-width="100%"
+                multiple></select>
+            </td>
+            <td style="min-width: 350px;max-width: 350px;width: 350px;">
+              <br />
+              <input type="range" ng-model="frequency" min="0" max="60" step="1" to-number />{{frequency}} tpm
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- message -->
+      <div id="queryMessage">
+        <p ng-bind="message" style="color: red;"></p>
+      </div>
+
+      <!-- sql list -->
+      <table class="blueTable" id="queriesTable">
+        <thead>
+          <tr>
+            <th>Query<a class="fa fa-plus" style="margin-left: 20px; font-size:16px;" ng-click="addQuery()"></a></th>
+            <th>Select</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tr ng-repeat="i in SQLQueriesList" ng-click="openQuery(i)">
+          <td><input type="text" ng-model="i.name" ng-keyup="updateQueryName(i)"
+              style="font-size: 12px;width: 95px; height:25px ;"></td>
+          <td><input ng-model="i.selected" type="checkbox"></td>
+          <td><a class="fa fa-trash" style="font-size:24px;" ng-click="deleteQuery(i)"> </a> </td>
+        </tr>
+      </table>
+
+
+    </div>
+  </div>
+  <div id="showMatrix" class="w3-modal">
+    <div class="modal-content-matrix" id="umlMatricContainer">
+      <header class="modal-header-matrix">
+        <span ng-click="closeMatrixWindowModal()" class="close-edit">&times;</span>
+        <h4 class="creation" style="text-align: center;">SQL Matrix</h4>
+      </header>
+      <div id="showMatrixTable">
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

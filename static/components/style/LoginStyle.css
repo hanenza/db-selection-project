@@ -1,0 +1,73 @@
+body{
+    margin:10 auto;
+    background-color: #F5F7F9;
+    background-repeat:repeat;
+    background-position:center;
+    font-family: Tahoma, Geneva, sans-serif;
+    }
+    h1,h3{
+     margin:0; padding:0;
+    }
+    .main{
+     margin:0 auto;
+     max-width:460px;
+      
+    }
+    .login-header{
+    color:rgb(91, 120, 136);
+    text-align:center;
+    font-size:200%;
+    }
+    .login-header h1 {
+    text-shadow: 0px 8px 10px #000;
+}
+    .login-field {
+        background: rgba(60, 93, 125, 0.42);
+border-radius: 5px;
+box-shadow: 1px 5px 13px rgb(24, 25, 22);
+ border-radius:5px;
+      /*border:2px solid #3c5d7d;
+      background:#3c5d7d;
+      box-shadow:2px 5px 15px #000;*/
+       margin:50px auto;
+       padding:30px;
+       overflow: hidden;
+       text-align:center;
+       
+    }
+.uname,.upass {
+width: 100%;
+max-width:95%;
+height:30px;
+margin:10px 0;
+border-radius:5px;
+border:2px solid #FFF;
+outline:none;
+font-size:14px;
+padding-left:10px;
+}
+.btn{
+height:30px;
+width:100px;
+font-size:100%;
+font-weight:bold;
+background:#107aa3;
+border:1px solid #3c98bd;
+border-radius:5px;
+color: #fff;
+text-transform:uppercase;
+cursor:pointer;
+}
+.btn:hover{
+background:#fff;
+color: #247c97;
+}
+.login-field h3{
+text-align:left;
+margin-left:4px;
+color:#fff;
+}
+.register{
+float:right;
+color:#fff;
+}

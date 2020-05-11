@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="components/style/AdminPageStyle.css">
+</head>
+
+<body>
+
+  <div>
+    <tr>
+      <td><button ng-click="projects()">Projects</button></td>
+      <td><button ng-click="users()">Users</button></td>
+      <td><button ng-click="dbProfiles()">DB Profiles</button></td>
+      <td><button ng-click="questions()">Questions</button></td>
+      <td><button ng-click="defaultValues()">Default Values</button></td>
+    </tr>
+  </div>
+
+  <br>
+  <br>
+
+  <!-- users table -->
+  <div ng-hide="usersTable">
+    <input type="text" id="emailInput" placeholder="Search for Email..">
+    <button ng-click="filterUser()">Search</button>
+    <table class="blueTable" id="userTable">
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>Email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Questions</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tr ng-repeat="row in dbTable">
+        <td>{{$index+1}}</td>
+        <td>{{row.Email}}</td>
+        <td>{{row.FirstName}}</td>
+        <td>{{row.LastName}}</td>
+        <td style="min-width: 200px;">
+          <p ng-repeat="(key,value) in row.questions">
+            {{key}}:{{value}}
+          </p>
+        </td>
+        <td><a class="fa fa-trash" style="font-size:24px;" ng-click="deleteUser(row.Email)"> </a> </td>
+      </tr>
+    </table>
+    <br>
+    <br>
+    <td><button ng-click="exportUsersData()">Export Data</button></td>
+  </div>
+
+  <!-- projects table -->
+  <div ng-hide="Showprojects">
+    <table class="blueTable">
+      <thead>
+        <tr>
+          <th>Project Name</th>
+          <th>Project Id</th>
+          <th>Project Description</th>
+          <th>Project Owner</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="i in projectTable">
+          <td class="cell-breakWord">{{i.ProjectName}}</td>
+          <td class="cell-breakWord">{{i.ProjectId}}</td>
+          <td class="cell-breakWord">{{i.ProjectDescription}}</td>
+          <td class="cell-breakWord">{{i.ProjectOwner}}</td>
+          <td class="cell-breakWord"><a style="margin-left:25px" ng-click="Editproject(i)" class="fa fa-edit"></a>
+            <a style="margin-left:25px" ng-click="showParticipants(i.ProjectId)" class="fa fa-users"></a>
+            <a style="margin-left:25px" class="fa fa-trash" style="font-size:24px;" ng-click="DeleteProject(i)"></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- question table -->
+  <div ng-hide="questionTable">
+    <table class="blueTable">
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>Question</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tr ng-repeat="row in dbTable">
+        <td>{{$index+1}}</td>
+        <td>{{row.question}}</td>
+        <td><a class="fa fa-trash" style="font-size:24px;" ng-click="deleteQuestion(row.question)"> </a> </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="text" ng-model="questionInput" style="width: 100%;"></td>
+        <td><a class="fa fa-plus" style="font-size:24px;" ng-click="addQuestion()"> </a></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- dbProfiles table -->
+  <div ng-hide="dbPrfilesTable">
+    <table class="blueTable">
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>DB Name</th>
+          <th ng-repeat="(key,value) in defaultNFR">{{key}}</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tr ng-repeat="row in dbTable">
+        <td>{{$index+1}}</td>
+        <td>{{row.dbName}}</td>
+        <td ng-repeat="(key, value) in defaultNFR">{{row[key]}}</td>
+        <td><a class="fa fa-trash" style="font-size:24px;" ng-click="deleteDBProfile(row.dbName)"> </a> </th>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="text" ng-model="newDB.dbName"></td>
+        <td ng-repeat="(key,value) in defaultNFR"><input type="text" ng-model="newDB[key]"></td>
+        <td><a class="fa fa-plus" style="font-size:24px;" ng-click="addDBProfile()"> </a></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- dbProfiles table -->
+  <div ng-hide="defaultValuesTable">
+    <table class="blueTable">
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>NFR</th>
+          <th>Value</th>
+          <th>type</th>
+          <th><a ng-click="updateDefaultNFR()" class="fa fa-wrench"></a>
+            <a ng-click="openAddNewNfrModal()" class="fa fa-plus"></a></th>
+        </tr>
+      </thead>
+      <tr ng-repeat="(key,value) in defaultNFR">
+        <td>{{$index+1}}</td>
+        <td>{{key}}</td>
+        <td><input type="text" ng-model="defaultNFR[key].value" style="width: 100%" /></td>
+        <td> {{defaultNFR[key].type}}</td>
+        <td><a style="margin-left:25px" class="fa fa-trash" style="font-size:24px;" ng-click="deleteNFR(key)"></a></td>
+      </tr>
+    </table>
+
+    <br>
+    <br>
+    <br>
+
+    <table class="blueTable">
+      <thead>
+        <tr>
+          <th>UML Editor</th>
+          <th>SQL Editor</th>
+          <th>NFR Table</th>
+          <th>Update</th>
+        </tr>
+      </thead>
+      <tr>
+        <td><input type="text" ng-model="defaultComponent.uml" style="width: 100%" class="currencyTextBox" /></td>
+        <td><input type="text" ng-model="defaultComponent.sql" style="width: 100%" class="currencyTextBox" /></td>
+        <td><input type="text" ng-model="defaultComponent.nfr" style="width: 100%" class="currencyTextBox" /></td>
+        <td><a ng-click="updateDefaultComponent()" class="fa fa-wrench"></a></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- message modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">System Message</h4>
+        </div>
+        <div class="modal-body">
+          <div ng-model="systemMessage">{{systemMessage}}</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- add new nfr modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="nfrModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add New NFR</h4>
+        </div>
+        <div class="modal-body">
+          NFR Name:
+          <input ng-model="tmp.newNfrName" type="text" style="width:160px; height:24px;">
+          <br>
+          <br>
+          Choise Input :
+          <input type="radio" ng-model="myChoise" value="range">Range
+          <input type="radio" ng-model="myChoise" value="selectBox">Select Box
+          <div ng-switch="myChoise">
+            <div ng-switch-when="range">
+              <br>
+              <h3>Range Input</h3>
+              <br>
+              <br>
+              Min Value :<input ng-model="rangeJson.minValue" type="text" style="width: 100%" class="currencyTextBox">
+              <br>
+              Max Value :<input ng-model="rangeJson.maxValue" type="text" style="width: 100%" class="currencyTextBox">
+              <br>
+              Step Value :<input ng-model="rangeJson.stepValue" type="text" style="width: 100%" class="currencyTextBox">
+              <br>
+            </div>
+            <div ng-switch-when="selectBox">
+              <br>
+              <h3>Select Box Input</h3>
+              <br>
+              <br>
+              Name :<input ng-model="newSelect.name" type="text" style="width: 100%" class="currencyTextBox">
+              <br>
+              Value :<input ng-model="newSelect.value" type="text" style="width: 100%" class="currencyTextBox">
+              <br>
+              <button ng-click="addNewSelectBoxChoise()" class="btn btn-default">Insert</button>
+              <br>
+              <br>
+              <table class="blueTable">
+                <thead>
+                  <tr>
+                    <th>Choise</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tr ng-repeat="(key,value) in choiseArray">
+                  <td>{{key}}</td>
+                  <td>{{value}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button ng-click="addNewNFR()" class="btn btn-default">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

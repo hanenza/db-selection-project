@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <link rel='stylesheet' href='app.css'>
+  <link rel="stylesheet" type="text/css" href="components/style/UMLEditorStyle.css">
+  <link rel="stylesheet" type="text/css" href="components/style/bootstrap.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="components/style/fontAwesome.css"> -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+  <div class="container">
+    <!-- this modal multiclass creation -->
+    <h1 class="hedaers">UML Editor Page</h1>
+    <P class="paragrapgs"> create youre own UML:</P>
+    <!-- <button onclick="location.href = '#/register';" id="registerButton" class="btn btn-success btn-lg" class="float-left submit-button" >Sign up page</button> -->
+
+    <select ng-model="selectedLink" ng-options="link for link in links" ng-init="selectedLink=links[0]"></select>
+    <br />
+    <br />
+    <div id="myholder">
+      <br />
+    </div>
+
+    <br />
+    <div id="test">
+
+    </div>
+    <br />
+    <button ng-click="showMatrixWindowModal()" class="button">Show Matrix</button>
+    <button ng-click="UpdateTheJSON()" class="button">Save</button>
+    <br />
+    <br />
+  </div>
+
+  <!--this modal is for edit : by click right click on the class  -->
+  <div id="editModal" class="w3-modal">
+    <div class="modal-content-edit">
+      <header class="modal-header-edit">
+        <span ng-click="closeEditWindow()" class="close-edit">&times;</span>
+        <h4 class="creation" style="text-align: center;">Edit Class</h4>
+      </header>
+      <div class="container-attribute" ng-style="hieghtSize">
+        <br />
+        <input ng-model="name" id="name" ng-bind="name" type="text" style="width:160px; height:24px;">
+        <div class="container-attribute-input">
+          <span ng-repeat="input in attributesInputs">
+            <br />
+            <input type="text" ng-model="input.l">
+          </span>
+        </div>
+        <div id="addingAttributeInputs" class="container-attribute-input">
+        </div>
+        <br><br>
+        <!-- this is the icons for delete update and add atrribute -->
+        <a class="w3-small" style="display: inline-block;margin:20px;" ng-click="addAttributeInput()"><i
+            class="fa fa-plus"></i></a>
+        <a class="w3-small" style="display: inline-block;margin:20px;" ng-click="updateClass()"><i
+            class="fa fa-wrench"></i></a>
+        <a class="w3-small" style="display: inline-block;margin:20px;" ng-click="deleteElement()"><i
+            class="fa fa-trash"></i></a>
+        <div>
+          <a class="fas fa-arrows-alt-v" ng-click="increaseheight()"></a>
+        </div>
+        <div class="middle">
+          <a class="fas fa-compress-arrows-alt" ng-click="decreasewidth()"></a>
+          <a class="fas fa-arrows-alt-h" ng-click="increasewidth()"></a>
+        </div>
+        <div class="bottom">
+          <a class="fas fa-compress-arrows-alt" ng-click="decreaseheight()"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--this modal is for edit : by click right click on the link  -->
+  <div id="linkModal" class="w3-modal">
+    <div class="modal-content-link">
+      <header class="modal-header-link">
+        <span ng-click="closelinkWindow()" class="close-edit">&times;</span>
+        <h2 ng-model="creationName" class="creation">Edit Role</h2>
+      </header>
+      <div class="container-elem" ng-style="hieghtSize">
+        <br />
+        <input type="text" id="source" ng-model="sourceN" placeholder="sourceName">
+        <br />
+        <br />
+        <input type="text" id="sourcetext" ng-model="sourceT" placeholder="sourcetext">
+        <br />
+        <br />
+        <input type="text" id="mytext" ng-model="mytext" placeholder="mytext">
+        <br />
+        <br />
+        <input type="text" id="targettext" ng-model="targetT" placeholder="targettext">
+        <br />
+        <br />
+        <input type="text" id="target" ng-model="targetN" placeholder="targetName">
+        <br />
+        <br />
+        <button ng-click=openClassCreationModal() ng-hide="isAssociationClass" class="attributeBtn">create association
+          class</button>
+        <br />
+        <br />
+        <button ng-click=checkthekindofthelink() class="attributeBtn">write</button>
+        <br />
+        <br />
+      </div>
+    </div>
+  </div>
+
+  <!-- this for show matrix modal -->
+  <!-- <div id="showMatrix" class="w3-modal">
+    <div class="modal-content-matrix" id="umlMatricContainer">
+      <header class="modal-header-matrix">
+        <span ng-click="closeMatrixWindowModal()" class="close-edit">&times;</span>
+        <h4 class="creation" style="text-align: center;">UML Matrix</h4>
+      </header>
+      <div id="showMatrixTable">
+      </div>
+    </div>
+  </div> -->
+
+
+  <!-- creating class modal -->
+  <div id="ClassModal" class="w3-modal">
+    <div class="modal-content">
+      <header class="modal-header-link">
+        <span ng-click="closeCreationAssociationModal()" class="close-edit">&times;</span>
+        <h2>Association Class Creation</h2>
+      </header>
+      <br>
+      <div class="container-elem">
+        <div>
+          <b ng-model="ElementType">{{ElementType}} name:</b>
+          <input type="text" ng-model="elementName" placeholder="Enter Name">
+          <input type="submit" value="Create" class="attributeBtn" ng-disabled="!elementName"
+            ng-click="submitAssoceationClass()">
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  <div id="multiClassModal" class="w3-modal">
+    <div class="modal-content">
+      <header class="modal-header-link">
+        <span ng-click="closeCreationModal()" class="close-edit">&times;</span>
+        <h2 ng-model="creationName" class="creation">{{creationName}} Creation</h2>
+      </header>
+      <br />
+      <div class="container-elem">
+        <div>
+          <b ng-model="ElementType">{{ElementType}} name:</b>
+          <input type="text" ng-model="elementName" placeholder="Enter Name">
+          <br />
+          <br />
+          <br />
+          <br />
+          <input type="submit" value="Create" ng-disabled="!elementName" class="myButton" ng-click="submit()">
+        </div>
+        <br>
+      </div>
+      <br>
+    </div>
+  </div>
+  <div id="showMatrix" class="w3-modal">
+    <div class="modal-content-matrix" id="umlMatricContainer">
+      <header class="modal-header-matrix">
+        <span ng-click="closeMatrixWindowModal()" class="close-edit">&times;</span>
+        <h4 class="creation" style="text-align: center;">UML Matrix</h4>
+      </header>
+      <div id="showMatrixTable" >
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

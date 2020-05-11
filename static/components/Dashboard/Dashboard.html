@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="components/style/Dashboard.css">
+
+</head>
+
+<body>
+  <br>
+  <div class="container">
+    <table class="blueTable">
+      <thead>
+        <tr>
+          <th>Project Name</th>
+          <th>Project Description</th>
+          <th>Project Owner</th>
+          <th><a class="fa fa-plus" style="font-size:24px;" ng-click="showAddWindowModal()"> </a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="i in projectTable">
+          <td class="cell-breakWord">{{i.ProjectName}}</td>
+          <td class="cell-breakWord">{{i.ProjectDescription}}</td>
+          <td class="cell-breakWord">{{i.ProjectOwner}}</td>
+          <td class="cell-breakWord"><a style="margin-left:25px" ng-click="Editproject(i)" class="fa fa-edit"></a>
+            <a style="margin-left:25px" ng-click="showShareWindowModal(i)" class="fas fa-share-square"></a>
+            <a style="margin-left:25px" ng-click="showParticipants(i.ProjectId,i.ProjectOwner)" class="fa fa-users"></a>
+            <a style="margin-left:25px" ng-click="editDescription(i)" class="fa fa-wrench"></a>
+            <a style="margin-left:25px" class="fa fa-trash" style="font-size:24px;" ng-click="DeleteProject(i)"></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <br />
+    <br />
+    <hr />
+  </div>
+
+  <!-- add project Modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="addProjectModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add New Project</h4>
+        </div>
+        <div class="modal-body">
+          Project Name:
+          <input style="width: 100%" class="currencyTextBox" ng-model="name" type="text"
+            style="width:160px; height:24px;">
+          <br>
+          <br>
+          Project Description:
+          <input style="width: 100%" class="currencyTextBox" ng-model="Description" id="Description" type="text"
+            style="width:160px; height:24px;">
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button ng-click="addNewProject()" class="btn btn-default">Add</button></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- share project Modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="shareProjectModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add New Project</h4>
+        </div>
+        <div class="modal-body">
+          Insert Email :
+          <input ng-model="UserEmail" style="width: 100%" class="currencyTextBox" type="text"
+            style="width:160px; height:24px;">
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button ng-click="shareproject()" class="btn btn-default">Share</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- show participants Modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="participantsModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Project Participants</h4>
+        </div>
+        <div class="modal-body">
+          <div ng-repeat="i in participantsArray">
+            {{i}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- show participants Modal for admin -->
+  <!-- Modal -->
+  <div class="modal fade" id="adminParticipantsModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Project Participants</h4>
+        </div>
+        <div class="modal-body">
+          <table class="blueTable">
+            <thead>
+              <tr>
+                <th>Participant</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="i in participantsArray">
+                <td>{{i}}</td>
+                <td><a style="margin-left:25px" ng-click="deleteParticipant(i)" class="fa fa-trash"></a> </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- edit description Modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="editDescriptionModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Project Description</h4>
+        </div>
+        <div class="modal-body">
+          Project Name :
+          <input style="width: 100%" class="currencyTextBox" ng-model="projectNameEdit" type="text"
+            style="width:160px; height:24px;">
+          <br>
+          <br>
+          Project Description:
+          <input style="width: 100%" class="currencyTextBox" ng-model="projectDescriptionEdit" type="text"
+            style="width:160px; height:24px;">
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button ng-click="updateProjectDescription()" class="btn btn-default">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
